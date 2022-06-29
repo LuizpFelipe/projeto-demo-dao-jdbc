@@ -1,10 +1,12 @@
 package aplicacao;
 
+import model.dao.FactorDAO;
+import model.dao.VendedorDao;
+
 public class Programa {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		VendedorDao vendedordao = FactorDAO.criadorVendedorDAO();
 	}
 
 }
