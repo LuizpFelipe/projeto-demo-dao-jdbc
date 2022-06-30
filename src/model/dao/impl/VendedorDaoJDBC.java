@@ -49,16 +49,8 @@ public class VendedorDaoJDBC implements VendedorDao{
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if(rs.next()) {
-				Departamento dep = new Departamento();
-				dep.setId(rs.getInt("DepartmentId"));
-				dep.setNome(rs.getString("DepName"));
-				Vendedor vendedor = new Vendedor();
-				vendedor.setId(rs.getInt("Id"));
-				vendedor.setNome(rs.getString("Name"));
-				vendedor.setEmail(rs.getString("Email"));
-				vendedor.setBaseSalario(rs.getDouble("BaseSalary"));
-				vendedor.setDataAniversario(rs.getDate("BirthDate"));
-				vendedor.setDepartamento(dep);
+				Departamento dep = intenciandoDepartamento(rs);
+				Vendedor vendedor = intanciandoVendedor(rs, dep);
 				return vendedor;
 			}
 			
@@ -71,6 +63,22 @@ public class VendedorDaoJDBC implements VendedorDao{
 		}
 	}
 
+	private Vendedor intanciandoVendedor(ResultSet rs, Departamento dep) throws SQLException {
+		Vendedor vendedor =new Vendedor();
+		vendedor.setId(rs.getInt("Id"));
+		vendedor.setNome(rs.getString("Name"));
+		vendedor.setEmail(rs.getString("Email"));
+		vendedor.setBaseSalario(rs.getDouble("BaseSalary"));
+		vendedor.setDataAniversario(rs.getDate("BirthDate"));
+		vendedor.setDepartamento(dep);
+		return vendedor;
+	}
+	private Departamento intenciandoDepartamento(ResultSet rs) throws SQLException {
+		Departamento dep =new Departamento();
+		dep.setId(rs.getInt("DepartmentId"));
+		dep.setNome(rs.getString("DepName"));
+		return dep;
+	}
 	@Override
 	public List<Vendedor> procureTodos() {
 		// TODO Auto-generated method stub
