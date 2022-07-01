@@ -21,7 +21,12 @@ public class Programa {
 		for(Vendedor vend: list) {
 			System.out.println(vend);
 		}
-
+		
+		System.out.println("___Teste Numero 3: Procurando o Vendedor por Id.____");
+		list = vendedordao.procureTodos();
+		for(Vendedor vend: list) {
+			System.out.println(vend);
+		}
 	}
 
 }
