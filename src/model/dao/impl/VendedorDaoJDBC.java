@@ -119,7 +119,7 @@ public class VendedorDaoJDBC implements VendedorDao{
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if(rs.next()) {
-				Departamento dep = intenciandoDepartamento(rs);
+				Departamento dep = intanciandoDepartamento(rs);
 				Vendedor vendedor = intanciandoVendedor(rs, dep);
 				return vendedor;
 			}
@@ -144,7 +144,7 @@ public class VendedorDaoJDBC implements VendedorDao{
 		return vendedor;
 	}
 	
-	private Departamento intenciandoDepartamento(ResultSet rs) throws SQLException {
+	private Departamento intanciandoDepartamento(ResultSet rs) throws SQLException {
 		Departamento dep =new Departamento();
 		dep.setId(rs.getInt("DepartmentId"));
 		dep.setNome(rs.getString("DepName"));
@@ -170,7 +170,7 @@ public class VendedorDaoJDBC implements VendedorDao{
 				Departamento dep = map.get(rs.getInt("DepartmentId"));
 				
 				if(dep == null) {
-					dep = intenciandoDepartamento(rs);
+					dep = intanciandoDepartamento(rs);
 					map.put(rs.getInt("DepartmentId"), dep);
 				}
 				Vendedor vendedor = intanciandoVendedor(rs, dep);
@@ -210,7 +210,7 @@ public class VendedorDaoJDBC implements VendedorDao{
 				Departamento dep = map.get(rs.getInt("DepartmentId"));
 				
 				if(dep == null) {
-					dep = intenciandoDepartamento(rs);
+					dep = intanciandoDepartamento(rs);
 					map.put(rs.getInt("DepartmentId"), dep);
 				}
 				Vendedor vendedor = intanciandoVendedor(rs, dep);
