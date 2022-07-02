@@ -2,6 +2,7 @@ package aplicacao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import model.dao.FactorDao;
 import model.dao.VendedorDao;
@@ -11,6 +12,7 @@ import model.entidades.Vendedor;
 public class Programa {
 
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 		VendedorDao vendedordao = FactorDao.criadorVendedorDAO();
 		System.out.println("___Teste Numero 1: Procurando o Vendedor por Id.____");
 		Vendedor vendedor = vendedordao.procureId(3);
@@ -39,6 +41,14 @@ public class Programa {
 		vendedor.setNome("Luiza Locina");
 		vendedordao.update(vendedor);
 		System.out.println("Update completo!!");
+		
+		System.out.println("___Teste Numero 5: mudandos dados de um Vendedor.____");
+		System.out.println("Digite o Id para Retirar do sistema!!");
+		int id = sc.nextInt();
+		vendedordao.deleteId(id);
+		System.out.println("Conta Retirada com sucesso!!");
+		
+		sc.close();
 	}
 
 }
