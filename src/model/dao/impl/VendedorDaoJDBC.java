@@ -64,7 +64,28 @@ public class VendedorDaoJDBC implements VendedorDao{
 
 	@Override
 	public void update(Vendedor obj) {
-		// TODO Auto-generated method stub
+PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement("UPDATE seller "
+					+ "SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? "
+					+ "WHERE Id = ?",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			st.setString(1, obj.getNome());
+			st.setString(2, obj.getEmail());
+			st.setDate(3, new java.sql.Date(obj.getDataAniversario().getTime()));
+			st.setDouble(4, obj.getBaseSalario());
+			st.setInt(5, obj.getDepartamento().getId());
+			st.setInt(6, obj.getId());
+			
+			st.executeUpdate();
+			
+		}catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}finally {
+			DB.closeStatement(st);
+		}
 		
 	}
 
@@ -110,12 +131,14 @@ public class VendedorDaoJDBC implements VendedorDao{
 		vendedor.setDepartamento(dep);
 		return vendedor;
 	}
+	
 	private Departamento intenciandoDepartamento(ResultSet rs) throws SQLException {
 		Departamento dep =new Departamento();
 		dep.setId(rs.getInt("DepartmentId"));
 		dep.setNome(rs.getString("DepName"));
 		return dep;
 	}
+	
 	@Override
 	public List<Vendedor> procureTodos() {
 		PreparedStatement st = null;
@@ -152,6 +175,7 @@ public class VendedorDaoJDBC implements VendedorDao{
 		}
 
 	}
+	
 	@Override
 	public List<Vendedor> procurePeloDepartamento(Departamento departamento) {
 		PreparedStatement st = null;

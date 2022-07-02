@@ -33,6 +33,12 @@ public class Programa {
 		Vendedor vendedor2 = new Vendedor(null, "Greg", "Greg@gmail.com", new Date(), 2.000, dep);
 		vendedordao.insert(vendedor2);
 		System.out.println(vendedor2.getId());
+		
+		System.out.println("___Teste Numero 5: mudandos dados de um Vendedor.____");
+		vendedor = vendedordao.procureId(1);
+		vendedor.setNome("Luiza Locina");
+		vendedordao.update(vendedor);
+		System.out.println("Update completo!!");
 	}
 
 }
